@@ -10,7 +10,7 @@ $ cd frontenddev
 # Pls edit USERNAME and PASSWORD in Dockerfile
 
 $ docker build -t rkaneko/frontenddev .
-$ docker run -p 2222:22 -p 8888:80 rkaneko/frontenddev
+$ docker run -d -p 2222:22 -p 8888:80 rkaneko/frontenddev
 
 # see nginx
 $ curl http://localhost:8888/
