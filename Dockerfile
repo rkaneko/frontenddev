@@ -1,5 +1,5 @@
 FROM ubuntu:14.04
-MAINTAINER rkaneko <ryota-kaneko@cybozu.co.jp>
+MAINTAINER rkaneko <kanek.o.dev@gmail.com>
 
 ENV USERNAME rkaneko
 ENV PASSWORD rkaneko
