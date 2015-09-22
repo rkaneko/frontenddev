@@ -56,5 +56,10 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
+# nginx
+ADD nginx/nginx.conf /etc/nginx/nginx.conf
+ADD nginx/default.conf /etc/nginx/conf.d/default.conf
+ADD nginx/html /var/www/html/
+
 EXPOSE 22 80
 CMD ["/usr/local/bin/supervisord"]
