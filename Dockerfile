@@ -1,17 +1,25 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER rkaneko <kanek.o.dev@gmail.com>
 
 ENV USERNAME rkaneko
 ENV PASSWORD rkaneko
 ENV NODEBREW_ROOT /home/${USERNAME}/.nodebrew
-ENV NODE_VERSION v0.12.7
+ENV NODE_VERSION v6.9.1
+ENV ANSIBLE_VERSION 2.0.0
 
-RUN locale-gen en_US.UTF-8  
-ENV LANG en_US.UTF-8  
-ENV LANGUAGE en_US:en  
-ENV LC_ALL en_US.UTF-8
+# Japanese
+RUN apt-get update && apt-get install -y language-pack-ja-base \
+  language-pack-ja \
+  ibus-mozc \
+  man
+RUN update-locale LANG=ja_JP.UTF-8 LANGUAGE=ja_JP:ja LC_ALL=ja_JP.UTF-8
+ENV LANG ja_JP.UTF-8
+ENV LC_ALL ja_JP.UTF-8
+ENV LC_CTYPE ja_JP.UTF-8
+RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
-# RUN apt-get update && sudo apt-get install -y sudo
+# sudo
+RUN apt-get update && apt-get install -y sudo
 
 # add user
 RUN useradd ${USERNAME} && echo "${USERNAME}:${PASSWORD}" | chpasswd
@@ -35,12 +43,15 @@ RUN apt-get update && apt-get install -y \
   python-pip \
   nginx
 
+# upgrade pip
+RUN pip install -U pip
+
 # for Multi process running in Docker
 RUN pip install supervisor
 ADD supervisor/supervisord.conf /etc/supervisord.conf
 
 # ansible
-RUN pip install ansible==1.9.3
+RUN pip install ansible==${ANSIBLE_VERSION}
 
 # Node.js
 RUN export NODEBREW_ROOT=${NODEBREW_ROOT} && curl -L git.io/nodebrew | perl - setup
