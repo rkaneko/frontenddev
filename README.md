@@ -36,3 +36,10 @@ $ ./npm.sh test
 # = npm run blahblah
 $ ./npm.sh run blahblah
 ```
+
+### HTTP server with back-end API server
+
+```bash
+$ docker-compose -f docker/docker-compose.yml up nginx
+# access localhost:8888 & localhost:8888/graphql
+```

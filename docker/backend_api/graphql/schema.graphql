@@ -1,0 +1,54 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+  authors(before: String, after: String, first: Int, last: Int): AuthorNodeConnection
+}
+
+type Mutation {
+  createAuthor(input: CreateAuthorInput!): CreateAuthorOutput
+}
+
+type AuthorNodeConnection {
+  pageInfo: PageInfo!
+  edges: [AuthorNodeEdge]!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type AuthorNodeEdge {
+  node: AuthorNode
+  cursor: String!
+}
+
+type AuthorNode implements Node {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  birthDate: DateTime!
+}
+
+interface Node {
+  id: ID!
+}
+
+scalar DateTime
+
+input CreateAuthorInput {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  birthDate: DateTime!
+}
+
+type CreateAuthorOutput {
+  author: AuthorNode
+  clientMutationId: String
+}

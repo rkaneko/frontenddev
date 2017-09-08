@@ -1,0 +1,29 @@
+{
+  "name": "frontenddev",
+  "version": "1.0.0",
+  "description": "Front-end development environment using Docker",
+  "dependencies": {},
+  "devDependencies": {
+    "apollo-codegen": "^0.16.5",
+    "casual": "^1.5.17",
+    "express": "^4.15.4",
+    "express-graphql": "^0.6.11",
+    "graphql": "^0.11.3",
+    "graphql-tools": "^1.2.2"
+  },
+  "scripts": {
+    "graphql": "npm run graphql:schema:json",
+    "graphql:schema:json": "apollo-codegen introspect-schema ./docker/backend_api/graphql/schema.graphql --output ./docker/backend_api/graphql/schema.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rkaneko/frontenddev.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rkaneko/frontenddev/issues"
+  },
+  "homepage": "https://github.com/rkaneko/frontenddev#readme"
+}

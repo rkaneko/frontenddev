@@ -1,1 +1,4 @@
 node_modules
+
+# generates dynamically
+docker/nginx/conf.d/default.conf
